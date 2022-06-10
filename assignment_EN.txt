@@ -1,0 +1,46 @@
+Fitness Reservation System - Description
+
+The fitness centre has various devices (currently only treadmills and bikes). Each of the devices is uniquely identified with a numeric code.
+
+The purpose is that a client can reserve a device for a particular timeslot. The provided timeslots are always 1 hour long. We differentiate 3 sessions: morning sessions between 8:00 and 12:00 (so 4 slots), noon sessions from 12:00 till 18:00, and evening sessions from 18:00 till 22:00. So in total there are 14 timeslots in a day.
+
+To make a reservation, you provide for which day and timeslot you want to reserve a particular device. There are some restrictions in place for reservations: you can only reserve a particular device for maximum 2 subsequent timeslots (but reserving it for a 3rd timeslot after a break is allowed), and you can only reserve a maximum of 4 timeslots in a day.
+
+A reservation contains the following info:
+	- client number, e-mail, first name, last name
+	- date
+	- for each timeslot, the reserved device
+
+Make sure that reservations can only be made in the future (of course) and you can only make reservations 1 week prior.
+
+It can happen that a device gets broken and maintenance is needed. In that case, the device should be temporarily unavailable. New devices can be added, and they must be added to the list of devices available to be reserved. If we remove a device from the fitness centre, we want to keep the historical record of reservations for that device. Furthermore, we don't remove a device for which there is a reservation made.
+
+Remark:
+	- unique codes for the devices must be made by the database
+	- the same holds true for the reservation numbers
+
+Available data:
+	- a list of clients with the following data: first name, last name, e-mail, address, date of birth, interests, client type - Gold, Silver, Bronze
+	- a list of available devices with the following data: device number (ID I think), device type
+
+User stories:
+	- As a customer, I identify myself in the system with either my client ID or my e-mail
+	- As a customer, I can make a reservation for a particular day and time, for which I provide which device I would like to use for which timeslot
+	- As an admin, I can add a device to the system
+	- As an admin, I can remove a device from the system
+	- As an admin, I can make a particular device temporarily unavailable
+
+
+Assignment:
+
+- Make a design: class diagram - make sure to distinguish all the layers. You're allowed to use any tool you want, can even be on paper.
+- Write the software, using the 3-layer architecture
+- UI must be userfriendly (dropdown lists, checkboxes, listboxes, etc). Windows must be scalable
+- Design must be maintainable, scalable, efficient
+- Provide the necessary quality guarantees by making Unit Tests
+- Give demo with following user stories:
+	- client makes reservation for noon session: reserve bike for 2h and immediately after that a treadmill for 1h
+	- admin adds new treadmill to list of available devices
+	- admin puts/marks device (bike) unavailable (requires maintenance)
+
+Technologies to use: Visual Studio, C#, ADO.NET, SQL Server (Microsoft SQL Express), WPF, .NET 5.0 or 6.0, xUnit

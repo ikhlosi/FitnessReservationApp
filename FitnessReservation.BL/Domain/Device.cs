@@ -6,5 +6,6 @@ using System.Threading.Tasks;
 
 namespace FitnessReservation.BL.Domain {
     internal class Device {
+        public int Id { get; set; }
     }
 }
