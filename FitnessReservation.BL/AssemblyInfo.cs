@@ -18,3 +18,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("0e82423b-d701-4800-851e-e944c08a23b2")]
 [assembly: InternalsVisibleTo("FitnessReservation.DL")]
 [assembly: InternalsVisibleTo("FitnessReservation.UI")]
+[assembly: InternalsVisibleTo("FitnessReservationBLTest")]

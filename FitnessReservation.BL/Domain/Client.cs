@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace FitnessReservation.BL.Domain {
     internal class Client {
         public Client(int iD, string email, string firstName, string lastName) {
-            SetId(iD);
+            SetID(iD);
             SetEmail(email);
             SetFirstName(firstName);
             SetLastName(lastName);
@@ -19,7 +19,7 @@ namespace FitnessReservation.BL.Domain {
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
 
-        public void SetId(int id) {
+        public void SetID(int id) {
             if (id <= 0) {
                 throw new ClientException("SetId");
             }        
