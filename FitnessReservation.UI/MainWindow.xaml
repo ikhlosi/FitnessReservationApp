@@ -21,9 +21,7 @@
         <TextBox Grid.Row="2" Name="txtEmail" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="80,10,10,0" TextWrapping="Wrap" />
 
         <Button Grid.Row="3" Name="btnLogin" Content="Login" Margin="44,2,44,2" Click="btnLogin_Click"  />
-<DatePicker SelectedDateFormat="Long" SelectedDate="3/23/09"
-                  DisplayDateStart="1/01/09" DisplayDateEnd="12/31/09" 
-                  FirstDayOfWeek="Monday"/>
+<!-- <DatePicker SelectedDateFormat="Long" SelectedDate="3/23/09" DisplayDateStart="1/01/09" DisplayDateEnd="12/31/09" FirstDayOfWeek="Monday"/> -->
         <!--<DatePicker />-->
     </Grid>
 </Window>

@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{782D79A8-B342-4BE2-AC02-DEF5050B9A3C}"
 	ProjectSection(SolutionItems) = preProject
 		assignment_EN.txt = assignment_EN.txt
+		connectionstring.txt = connectionstring.txt
 		data_design.txt = data_design.txt
 		requirements.txt = requirements.txt
 	EndProjectSection
@@ -16,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservation.UI", "Fi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservation.DL", "FitnessReservation.DL\FitnessReservation.DL.csproj", "{0B14F192-6B5C-43F8-9842-E49D06C5AB8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessReservationBLTest", "FitnessReservationBLTest\FitnessReservationBLTest.csproj", "{F51A43D5-DA82-4352-AD6F-9FC56FF7B0BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservationBLTest", "FitnessReservationBLTest\FitnessReservationBLTest.csproj", "{F51A43D5-DA82-4352-AD6F-9FC56FF7B0BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

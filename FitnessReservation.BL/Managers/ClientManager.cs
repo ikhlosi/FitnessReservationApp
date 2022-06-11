@@ -1,4 +1,5 @@
 ﻿using FitnessReservation.BL.Domain;
+using FitnessReservation.BL.Exceptions;
 using FitnessReservation.BL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,14 @@ namespace FitnessReservation.BL.Managers {
         }
 
         public Client GetClientById(int id) {
+            if (id <= 0) {
+                throw new ClientManagerException("GetClientById");
+            }
             return repo.FindClientById(id);
+        }
+
+        public Client GetClientByEmail(string email) {
+            return repo.FindClientByEmail(email);
         }
     }
 }
