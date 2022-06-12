@@ -5,23 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessReservation.UI"
         mc:Ignorable="d"
-        Title="Login" Height="150" Width="300">
+        Title="Login" Height="220" Width="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <!--<RowDefinition Height="0.75*"/>-->
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Login Page" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Grid.Row="1" Content="Client ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0"/>
-        <TextBox Grid.Row="1" Name="txtClientID" HorizontalAlignment="Stretch" Margin="80,10,10,0" VerticalAlignment="Top"/>
+        <!--<Label Content="Login Page" HorizontalAlignment="Center" VerticalAlignment="Top"/>-->
 
-        <Label Grid.Row="2" Content="E-mail:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0"/>
-        <TextBox Grid.Row="2" Name="txtEmail" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="80,10,10,0" TextWrapping="Wrap" />
+        <Label Grid.Row="2" Content="Client ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Height="24" Width="58"/>
+        <TextBox Grid.Row="2" Name="txtClientID" Margin="80,10,10,0" VerticalAlignment="Top" UndoLimit="98" InputScope="Number" Height="18"/>
 
-        <Button Grid.Row="3" Name="btnLogin" Content="Login" Margin="44,2,44,2" Click="btnLogin_Click"  />
-<!-- <DatePicker SelectedDateFormat="Long" SelectedDate="3/23/09" DisplayDateStart="1/01/09" DisplayDateEnd="12/31/09" FirstDayOfWeek="Monday"/> -->
+        <Label Grid.Row="3" Content="E-mail:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Height="25" Width="46"/>
+        <TextBox Grid.Row="3" Name="txtEmail" VerticalAlignment="Top" Margin="80,10,10,0" TextWrapping="Wrap" Height="18" />
+
+        <Button Grid.Row="4" Name="btnLogin" Content="Login" Margin="44,2,44,2" Click="btnLogin_Click"  />
+
+        <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Enter either your client ID or e-mail." HorizontalAlignment="Center" FontSize="11"/>
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="Client ID will have preference" FontSize="11" HorizontalAlignment="Center" FontWeight="Bold"/>
+        <!-- <DatePicker SelectedDateFormat="Long" SelectedDate="3/23/09" DisplayDateStart="1/01/09" DisplayDateEnd="12/31/09" FirstDayOfWeek="Monday"/> -->
         <!--<DatePicker />-->
     </Grid>
 </Window>

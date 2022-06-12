@@ -27,20 +27,32 @@ namespace FitnessReservation.UI {
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e) {
-            int? clientID = null;
-            string clientEmail = null;
-            if (string.IsNullOrWhiteSpace(txtClientID.Text)) {
-                if (string.IsNullOrWhiteSpace(txtEmail.Text)) {
-                    MessageBox.Show("Please provide either a Client ID or an E-mail");
-                } else {
-                    clientEmail = txtEmail.Text;
+            try {
+                //int clientID;
+                //string clientEmail;
+                if (!string.IsNullOrWhiteSpace(txtClientID.Text)) {
+                    int clientID = int.Parse(txtClientID.Text);
+                    clientManager.GetClientById(clientID);
                     HomePageWindow homePageWindow = new HomePageWindow();
                     homePageWindow.ShowDialog();
+                } else if (!string.IsNullOrWhiteSpace(txtEmail.Text)) {
+                    string clientEmail = txtEmail.Text;
+                    HomePageWindow homePageWindow = new HomePageWindow();
+                    homePageWindow.ShowDialog();
+                } else {
+                    MessageBox.Show("Please provide either a Client ID or an E-mail");
                 }
-            } else {
-                clientID = Convert.ToInt32(txtClientID.Text);
-                HomePageWindow homePageWindow = new HomePageWindow();
-                homePageWindow.ShowDialog();
+                //if (string.IsNullOrWhiteSpace(txtClientID.Text)) {
+                //    if (string.IsNullOrWhiteSpace(txtEmail.Text)) {
+                //        ;
+                //    } else {
+                //                           }
+                //} else {
+                //    HomePageWindow homePageWindow = new HomePageWindow();
+                //    homePageWindow.ShowDialog();
+                //}
+            } catch (Exception ex){
+                MessageBox.Show(ex.Message, "Login");
             }
         }
     }
