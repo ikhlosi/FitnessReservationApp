@@ -21,7 +21,7 @@
         <TextBox Grid.Row="2" Name="txtClientID" Margin="80,10,10,0" VerticalAlignment="Top" UndoLimit="98" InputScope="Number" Height="18"/>
 
         <Label Grid.Row="3" Content="E-mail:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Height="25" Width="46"/>
-        <TextBox Grid.Row="3" Name="txtEmail" VerticalAlignment="Top" Margin="80,10,10,0" TextWrapping="Wrap" Height="18" />
+        <TextBox Grid.Row="3" Name="txtEmail" VerticalAlignment="Top" Margin="80,10,10,0" TextWrapping="Wrap" Height="18" InputScope="EmailSmtpAddress" />
 
         <Button Grid.Row="4" Name="btnLogin" Content="Login" Margin="44,2,44,2" Click="btnLogin_Click"  />
 

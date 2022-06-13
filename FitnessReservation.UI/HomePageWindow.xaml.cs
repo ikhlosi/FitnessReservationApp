@@ -17,7 +17,10 @@ namespace FitnessReservation.UI {
     /// Interaction logic for HomePageWindow.xaml
     /// </summary>
     public partial class HomePageWindow : Window {
-        public HomePageWindow() {
+        public HomePageWindow(int clientID) {
+            InitializeComponent();
+        }
+        public HomePageWindow(string clientEmail) {
             InitializeComponent();
         }
     }

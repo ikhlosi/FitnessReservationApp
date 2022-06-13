@@ -1,0 +1,2 @@
+- 
+- change Label with TextBlock whenever possible because Label is heavier

@@ -32,12 +32,12 @@ namespace FitnessReservation.UI {
                 //string clientEmail;
                 if (!string.IsNullOrWhiteSpace(txtClientID.Text)) {
                     int clientID = int.Parse(txtClientID.Text);
-                    clientManager.GetClientById(clientID);
-                    HomePageWindow homePageWindow = new HomePageWindow();
+                    //clientManager.GetClientById(clientID);
+                    HomePageWindow homePageWindow = new HomePageWindow(clientID);
                     homePageWindow.ShowDialog();
                 } else if (!string.IsNullOrWhiteSpace(txtEmail.Text)) {
                     string clientEmail = txtEmail.Text;
-                    HomePageWindow homePageWindow = new HomePageWindow();
+                    HomePageWindow homePageWindow = new HomePageWindow(clientEmail);
                     homePageWindow.ShowDialog();
                 } else {
                     MessageBox.Show("Please provide either a Client ID or an E-mail");
