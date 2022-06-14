@@ -12,7 +12,7 @@ namespace FitnessReservation.BL.Domain {
         //public Device Device{ get; private set; }
         //public List<TimeSlot> ChosenTimeslots { get; private set; }
         public Client Client;
-        private Dictionary<int, int> Sessions = new Dictionary<int, int>(); // key: TimeSlot.ID; value Device.ID
+        //private Dictionary<int, int> Sessions = new Dictionary<int, int>(); // key: TimeSlot.ID; value Device.ID
 
         public Reservation(int id, DateTime date, Client c) {
             SetID(id);
@@ -35,12 +35,12 @@ namespace FitnessReservation.BL.Domain {
             this.Client = c;
         }
 
-        public void AddSession(int timeslotId, int deviceId) {
-            if (Sessions.ContainsKey(timeslotId)) {
-                throw new ReservationException("AddSession");
-            }
-            Sessions.Add(timeslotId, deviceId);
-        }
+        //public void AddSession(int timeslotId, int deviceId) {
+        //    if (Sessions.ContainsKey(timeslotId)) {
+        //        throw new ReservationException("AddSession");
+        //    }
+        //    Sessions.Add(timeslotId, deviceId);
+        //}
 
     }
 }
