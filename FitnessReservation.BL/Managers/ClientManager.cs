@@ -28,5 +28,8 @@ namespace FitnessReservation.BL.Managers {
         //public Client GetClientByEmail(string email) {
         //    return repo.FindClientByEmail(email);
         //}
+        public Client GetClientDetails(int? id, string email) {
+            return repo.GetClientDetails(id, email);
+        }
     }
 }

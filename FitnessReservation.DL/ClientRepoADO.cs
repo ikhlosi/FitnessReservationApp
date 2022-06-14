@@ -46,11 +46,73 @@ namespace FitnessReservation.DL {
                     //cmd.Parameters["@email"].Value = email;
                     cmd.CommandText = query;
                     //cmd.ExecuteNonQuery();
-                    return (string)cmd.ExecuteScalar();
+                    string clientFname = (string)cmd.ExecuteScalar();
+                    if (string.IsNullOrEmpty(clientFname)) {
+                        throw new ClientRepoADOException("FindClient - Client doesn't exist");
+                    }
+                    return clientFname;
+                }
+                catch (ClientRepoADOException) {
+                    throw;
                 }
                 catch (Exception ex) {
 
                     throw new ClientRepoADOException("FindClient",ex);
+                }
+                finally {
+                    conn.Close();
+                }
+            }
+        }
+
+        public Client GetClientDetails(int? id, string email) {
+            if ((!id.HasValue) && (string.IsNullOrEmpty(email) == true)) {
+                throw new ClientRepoADOException("FindClient - no valid input");
+            }
+
+            SqlConnection conn = getConnection();
+            string query = "SELECT * from dbo.Client ";
+            //+"WHERE Email = @email";
+            if (id.HasValue) {
+                query += "WHERE ID=@id";
+            } else {
+                query += "WHERE Email=@email";
+            }
+            using (SqlCommand cmd = conn.CreateCommand()) {
+                conn.Open();
+                try {
+                    if (id.HasValue) {
+                        cmd.Parameters.AddWithValue("@id", id);
+                    } else {
+                        cmd.Parameters.AddWithValue("@email", email);
+                    }
+                    //cmd.Parameters.Add(new SqlParameter("@email", SqlDbType.NVarChar));
+                    //cmd.Parameters["@email"].Value = email;
+                    cmd.CommandText = query;
+                    //cmd.ExecuteNonQuery();
+                    IDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read()) {
+                        int clientID = (int)reader["ID"];
+                        string clientFname = (string)reader["Fname"];
+                        string clientLname = (string)reader["Lname"];
+                        string clientEmail = (string)reader["Email"];
+                        Client c = new Client(clientID,clientEmail,clientFname,clientLname);
+                        return c;
+                    } else {
+                        throw new ClientRepoADOException("GetClientDetails - could not find client");
+                    }
+                    //string clientFname = (string)cmd.ExecuteScalar();
+                    //if (string.IsNullOrEmpty(clientFname)) {
+                    //    throw new ClientRepoADOException("FindClient - Client doesn't exist");
+                    //}
+                    //return clientFname;
+                }
+                catch (ClientRepoADOException) {
+                    throw;
+                }
+                catch (Exception ex) {
+
+                    throw new ClientRepoADOException("FindClient", ex);
                 }
                 finally {
                     conn.Close();

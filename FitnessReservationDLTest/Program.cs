@@ -8,5 +8,6 @@ string connectionString = @"Data Source=DESKTOP-QT687QR\SQLEXPRESS;Initial Catal
 
 ClientManager m = new ClientManager(new ClientRepoADO(connectionString));
 
-Console.WriteLine(m.GetClientFname(1, null));
-Console.WriteLine(m.GetClientFname(null, "ibra@khlosi.com"));
+//Console.WriteLine(m.GetClientFname(1, null));
+//Console.WriteLine(m.GetClientFname(null, "ibra@khlosi.com"));
+Console.WriteLine((m.GetClientDetails(4, null)).LastName);

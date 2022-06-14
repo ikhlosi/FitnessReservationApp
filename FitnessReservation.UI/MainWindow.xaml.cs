@@ -20,28 +20,37 @@ namespace FitnessReservation.UI {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private ClientManager clientManager;
+        //private ClientManager clientManager;
         public MainWindow() {
             InitializeComponent();
-            clientManager = new ClientManager(new ClientRepoADO("...."));
+            //clientManager = new ClientManager(new ClientRepoADO("...."));
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e) {
             try {
-                //int clientID;
-                //string clientEmail;
-                if (!string.IsNullOrWhiteSpace(txtClientID.Text)) {
-                    int clientID = int.Parse(txtClientID.Text);
-                    //clientManager.GetClientById(clientID);
-                    HomePageWindow homePageWindow = new HomePageWindow(clientID);
-                    homePageWindow.ShowDialog();
-                } else if (!string.IsNullOrWhiteSpace(txtEmail.Text)) {
-                    string clientEmail = txtEmail.Text;
-                    HomePageWindow homePageWindow = new HomePageWindow(clientEmail);
-                    homePageWindow.ShowDialog();
-                } else {
+                int? clientID = null;
+                string clientEmail;
+                if (string.IsNullOrWhiteSpace(txtClientID.Text) && string.IsNullOrWhiteSpace(txtEmail.Text)) {
                     MessageBox.Show("Please provide either a Client ID or an E-mail");
                 }
+                if (!string.IsNullOrWhiteSpace(txtClientID.Text)) {
+                    clientID = int.Parse(txtClientID.Text);
+                }
+                clientEmail = txtEmail.Text;
+                HomePageWindow homePageWindow = new HomePageWindow(clientID, clientEmail);
+                homePageWindow.ShowDialog();
+                //if (!string.IsNullOrWhiteSpace(txtClientID.Text)) {
+                //    int clientID = int.Parse(txtClientID.Text);
+                //    //clientManager.GetClientById(clientID);
+                //    HomePageWindow homePageWindow = new HomePageWindow(clientID);
+                //    homePageWindow.ShowDialog();
+                //} else if (!string.IsNullOrWhiteSpace(txtEmail.Text)) {
+                //    string clientEmail = txtEmail.Text;
+                //    HomePageWindow homePageWindow = new HomePageWindow(clientEmail);
+                //    homePageWindow.ShowDialog();
+                //} else {
+                //    MessageBox.Show("Please provide either a Client ID or an E-mail");
+                //}
                 //if (string.IsNullOrWhiteSpace(txtClientID.Text)) {
                 //    if (string.IsNullOrWhiteSpace(txtEmail.Text)) {
                 //        ;
