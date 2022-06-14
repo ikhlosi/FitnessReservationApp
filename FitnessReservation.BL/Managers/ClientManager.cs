@@ -15,15 +15,18 @@ namespace FitnessReservation.BL.Managers {
             this.repo = repo;
         }
 
-        public Client GetClientById(int id) {
-            if (id <= 0) {
-                throw new ClientManagerException("GetClientById");
-            }
-            return repo.FindClientById(id);
+        public string GetClientFname(int? id, string email) {
+            return repo.FindClient(id, email);
         }
+        //public Client GetClientById(int id) {
+        //    if (id <= 0) {
+        //        throw new ClientManagerException("GetClientById");
+        //    }
+        //    return repo.FindClientById(id);
+        //}
 
-        public Client GetClientByEmail(string email) {
-            return repo.FindClientByEmail(email);
-        }
+        //public Client GetClientByEmail(string email) {
+        //    return repo.FindClientByEmail(email);
+        //}
     }
 }

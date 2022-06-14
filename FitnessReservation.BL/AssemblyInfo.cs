@@ -19,3 +19,4 @@ using System.Runtime.InteropServices;
 [assembly: InternalsVisibleTo("FitnessReservation.DL")]
 [assembly: InternalsVisibleTo("FitnessReservation.UI")]
 [assembly: InternalsVisibleTo("FitnessReservationBLTest")]
+[assembly: InternalsVisibleTo("FitnessReservationDLTest")]

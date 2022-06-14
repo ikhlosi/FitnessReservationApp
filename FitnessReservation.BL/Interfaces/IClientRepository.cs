@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FitnessReservation.BL.Interfaces {
     internal interface IClientRepository {
-        public Client FindClientByEmail(string email);
-        public Client FindClientById(int id);
+        public string FindClient(int? id, string email);
+        //public Client FindClientById(int id);
     }
 }
