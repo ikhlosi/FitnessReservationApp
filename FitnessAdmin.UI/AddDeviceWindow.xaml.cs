@@ -27,7 +27,10 @@ namespace FitnessAdmin.UI {
         }
 
         private void btnAddDevice_Click(object sender, RoutedEventArgs e) {
-            
+            string type = txtDeviceType.Text;
+            dm.AddDevice(type);
+            DialogResult = true;
+            Close();
         }
     }
 }

@@ -13,5 +13,6 @@ namespace FitnessReservation.BL.Interfaces {
         void RemoveDevice(int deviceID);
         void MarkDeviceAvailable(int iD);
         void MarkDeviceUnAvailable(int iD);
+        void AddDevice(string type);
     }
 }

@@ -162,5 +162,26 @@ namespace FitnessReservation.DL {
                 }
             }
         }
+
+        public void AddDevice(string type) {
+            SqlConnection conn = getConnection();
+            string query = "INSERT INTO [dbo].[Device](Type,Is_usable) " +
+                "VALUES(@type,1)";
+            using (SqlCommand command = conn.CreateCommand()) {
+                command.CommandText = query;
+                conn.Open();
+                try {
+                    command.Parameters.AddWithValue("@type", type);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) {
+                    throw new DeviceRepoADOException("RemoveDevice", ex);
+                }
+                finally {
+                    conn.Close();
+                }
+            }
+
+        }
     }
 }

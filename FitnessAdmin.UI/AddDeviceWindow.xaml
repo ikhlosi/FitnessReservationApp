@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Type:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Name="txtDeviceType" Margin="10,25,10,25"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="txtDeviceType" Margin="10,15,10,15"/>
         <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="btnAddDevice" Content="Add" Click="btnAddDevice_Click"/>
     </Grid>
 </Window>

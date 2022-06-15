@@ -49,7 +49,11 @@ namespace FitnessAdmin.UI {
 
         private void btnAddDevice_Click(object sender, RoutedEventArgs e) {
             AddDeviceWindow addDeviceWindow = new AddDeviceWindow();
-            addDeviceWindow.ShowDialog();
+            if (addDeviceWindow.ShowDialog() == true) {
+                comboFilterDevice.ItemsSource = dm.SelectDevices();
+                listBoxDevices.ItemsSource = dm.GetAllDevices();
+            }
+            //addDeviceWindow.txtDeviceType.Text;
         }
 
         private void comboFilterDevice_SelectionChanged(object sender, SelectionChangedEventArgs e) {

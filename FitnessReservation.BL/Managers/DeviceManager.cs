@@ -35,6 +35,10 @@ namespace FitnessReservation.BL.Managers {
             repo.MarkDeviceAvailable(iD);
         }
 
+        internal void AddDevice(string type) { // TODO: check for faults
+            repo.AddDevice(type);
+        }
+
         internal void MarkDeviceUnAvailable(int iD) {
             repo.MarkDeviceUnAvailable(iD);
         }
