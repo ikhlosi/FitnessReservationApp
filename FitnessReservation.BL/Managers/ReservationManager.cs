@@ -23,16 +23,23 @@ namespace FitnessReservation.BL.Managers {
             return repo.GetReservations(id);
         }
 
-        //public void MakeReservation(int clientID, DateTime? reservationDate, int timeslotID, string deviceType) {
-        //    try {
-        //        int reservationID = this.WriteReservationInDB(clientID, reservationDate);
-        //        this.WriteReservationDetailsInDB;
-        //    }
-        //    catch (Exception ex) {
-        //        throw new ReservationManagerException("MakeReservation", ex);
-        //    }
+        public void MakeReservation(int clientID, DateTime? reservationDate, int? timeslotID, string deviceType) {
+            try {
+            if (reservationDate < DateTime.Today.AddDays(1) || reservationDate > DateTime.Today.AddDays(7)) {
+                throw new ReservationManagerException("Only allowed to choose a date which is in the future (maximum 1 week)");
+            }
+                int reservationID = this.WriteReservationInDB(clientID, (DateTime)reservationDate);
+                int deviceID = this.AssignDevice((DateTime)reservationDate, deviceType, (int)timeslotID);
+                this.WriteReservationDetailsInDB(reservationID,deviceID,(int)timeslotID);
+            }
+            catch (ReservationManagerException) {
+                throw;
+            }
+            catch (Exception ex) {
+                throw new ReservationManagerException("MakeReservation", ex);
+            }
 
-        //}
+        }
 
         public int WriteReservationInDB(int clientID, DateTime reservationDate) {
              if (clientID <= 0) {
@@ -52,6 +59,15 @@ namespace FitnessReservation.BL.Managers {
                 throw new ReservationManagerException("GetReservationId - invalid input");
             }
             return repo.GetReservationId(reservationID, reservationDate);
+        }
+
+        public int AssignDevice(DateTime date, string type, int timeslotID) { // TODO: check for faults
+            IReadOnlyList<int> deviceIDs = repo.GetAvailableDevices(date, type, timeslotID);
+            Random r = new Random();
+            int index = r.Next(deviceIDs.Count);
+            return deviceIDs[index];
+            
+            //return repo.AssignDevice(date, type, timeslot);
         }
     }
 }

@@ -22,15 +22,18 @@ namespace FitnessReservation.UI {
     public partial class MakeReservationWindow : Window {
         private ReservationManager rm;
         private TimeSlotManager tm;
+        private DeviceManager dm;
         private int clientID;
         public MakeReservationWindow(int clientID) {
             InitializeComponent();
             rm = new ReservationManager(new ReservationRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
             tm = new TimeSlotManager(new TimeSlotRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
+            dm = new DeviceManager(new DeviceRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
             this.clientID = clientID;
             dateReservation.DisplayDateStart = DateTime.Today.AddDays(1);
             dateReservation.DisplayDateEnd = DateTime.Today.AddDays(7);
             comboTimeslot.ItemsSource = tm.SelectTimeSlots();
+            comboDevice.ItemsSource = dm.SelectDevices();
             //comboDevice.ItemsSource = new List<string> { "ltreadmill", "bike"};
         }
 
@@ -41,17 +44,20 @@ namespace FitnessReservation.UI {
             try {
                 int clientId = this.clientID;
                 selectedDate = dateReservation.SelectedDate;
+                selectedTimeslotId = ++comboTimeslot.SelectedIndex;
+                selectedDeviceType = (string)comboDevice.SelectedItem;
+                rm.MakeReservation(clientID, selectedDate, selectedTimeslotId,selectedDeviceType);
                 //int reservationID = rm.WriteReservationInDB(clientId, selectedDate);
 
                 //comboTimeslot.SelectedIndex
                 //comboTimeslot.SelectedIndex = 0;
-                                //rm.MakeReservation(selectedDate, selectedDeviceType, selectedTimeslotId);
             }
             catch (Exception ex) { 
+                MessageBox.Show(ex.Message);
             }
-            if (dateReservation.SelectedDate < DateTime.Today.AddDays(1) || dateReservation.SelectedDate > DateTime.Today.AddDays(7)) {
-                MessageBox.Show("Only allowed to choose a date which is in the future (maximum 1 week)");
-            }
+            //if (dateReservation.SelectedDate < DateTime.Today.AddDays(1) || dateReservation.SelectedDate > DateTime.Today.AddDays(7)) {
+            //    MessageBox.Show("Only allowed to choose a date which is in the future (maximum 1 week)");
+            //}
         }
 
         private void dateReservation_SelectedDateChanged(object sender, SelectionChangedEventArgs e) {

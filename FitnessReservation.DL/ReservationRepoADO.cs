@@ -144,5 +144,42 @@ namespace FitnessReservation.DL {
                 conn.Close();
             }
         }
+
+        public IReadOnlyList<int> GetAvailableDevices(DateTime date, string type, int timeslotID) {
+            List<int> availableDevices = new List<int>();
+            SqlConnection conn = getConnection();
+            //string query = "SELECT ID FROM dbo.Device d " +
+            //    "LEFT JOIN dbo.Reservationdetails rd ON d.ID=rd.Device_id " +
+            //    "LEFT JOIN dbo.Reservations r ON r.ID=rd.Reservation_id " +
+            //    "WHERE d.Type=@type AND r.Reservation_date";
+            string query = "SELECT d.ID FROM Device d " +
+                "WHERE d.ID NOT IN ( " +
+                "SELECT rd.Device_id FROM Reservationdetails rd " +
+                "JOIN Reservation r ON r.ID=rd.Reservation_id " +
+                "WHERE r.Reservation_date=@date AND rd.Timeslot_id=@tsid) " +
+                "AND d.Type=@type AND d.Is_usable=1";
+
+            using (SqlCommand cmd = conn.CreateCommand()) {
+                conn.Open();
+                try {
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@tsid", timeslotID);
+                    cmd.Parameters.AddWithValue("@type", type);
+                    cmd.CommandText = query;
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        availableDevices.Add((int)reader["ID"]);
+                    }
+                    return availableDevices.AsReadOnly();
+                }
+                catch (Exception ex) {
+                    throw new ReservationRepoADOException("GetAvailableDevices", ex);
+                }
+                finally {
+                    conn.Close();
+                }
+               
+            }
+        }
     }
 }
