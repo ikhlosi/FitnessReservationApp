@@ -1,5 +1,7 @@
-﻿using FitnessReservation.BL.Interfaces;
+﻿using FitnessReservation.BL.Domain;
+using FitnessReservation.BL.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,26 @@ namespace FitnessReservation.BL.Managers {
 
         public IReadOnlyList<string> SelectDevices() {
             return repo.SelectDevices();
+        }
+
+        public IReadOnlyList<Device> GetAllDevices() { // TODO: check for faults
+            return repo.GetAllDevices();
+        }
+
+        public IReadOnlyList<Device> GetDevicesOfType(string selectedItem) {
+            return repo.GetDevicesOfType(selectedItem);
+        }
+
+        internal void RemoveDevice(int deviceID) { // TODO: check for faults
+            repo.RemoveDevice(deviceID);
+        }
+
+        internal void MarkDeviceAvailable(int iD) {
+            repo.MarkDeviceAvailable(iD);
+        }
+
+        internal void MarkDeviceUnAvailable(int iD) {
+            repo.MarkDeviceUnAvailable(iD);
         }
     }
 }

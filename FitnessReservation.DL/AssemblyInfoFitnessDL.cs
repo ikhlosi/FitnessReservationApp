@@ -17,4 +17,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("e0ed58fb-5b3d-4762-9acd-10ffc0921baa")]
 [assembly: InternalsVisibleTo("FitnessReservation.UI")]
+[assembly: InternalsVisibleTo("FitnessAdmin.UI")]
 [assembly: InternalsVisibleTo("FitnessReservationDLTest")]

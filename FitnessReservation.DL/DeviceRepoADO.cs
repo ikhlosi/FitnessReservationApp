@@ -1,4 +1,5 @@
-﻿using FitnessReservation.BL.Interfaces;
+﻿using FitnessReservation.BL.Domain;
+using FitnessReservation.BL.Interfaces;
 using FitnessReservation.DL.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,124 @@ namespace FitnessReservation.DL {
                     connection.Close();
                 }
             }
-        } 
+        }
+
+        public IReadOnlyList<Device> GetAllDevices() {
+            List<Device> devices = new List<Device>();
+            SqlConnection conn = getConnection();
+            string query = "SELECT * FROM [dbo].[Device]";
+            using (SqlCommand command = conn.CreateCommand()) {
+                command.CommandText = query;
+                conn.Open();
+                try {
+                    IDataReader reader = command.ExecuteReader(); //of SqlDataReader
+                    while (reader.Read()) {
+                        int id = (int)reader["ID"];
+                        string type = (string)reader["Type"];
+                        bool availability = (bool)reader["Is_usable"];
+                        Device d = new Device(id, type, availability);
+                        devices.Add(d);
+                    }
+                    reader.Close();
+                    return devices.AsReadOnly();
+                }
+                catch (Exception ex) {
+                    throw new DeviceRepoADOException("GetAllDevices", ex);
+                }
+                finally {
+                    conn.Close();
+                }
+            }
+        }
+
+        public IReadOnlyList<Device> GetDevicesOfType(string selectedItem) {
+            List<Device> devices = new List<Device>();
+            SqlConnection conn = getConnection();
+            string query = "SELECT * FROM [dbo].[Device] WHERE Type=@type";
+            using (SqlCommand command = conn.CreateCommand()) {
+                command.CommandText = query;
+                conn.Open();
+                try {
+                    command.Parameters.AddWithValue("@type", selectedItem);
+                    IDataReader reader = command.ExecuteReader(); //of SqlDataReader
+                    while (reader.Read()) {
+                        int id = (int)reader["ID"];
+                        string type = (string)reader["Type"];
+                        bool availability = (bool)reader["Is_usable"];
+                        Device d = new Device(id, type, availability);
+                        devices.Add(d);
+                    }
+                    reader.Close();
+                    return devices.AsReadOnly();
+                }
+                catch (Exception ex) {
+                    throw new DeviceRepoADOException("GetDeviceOfType", ex);
+                }
+                finally {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void RemoveDevice(int deviceID) {
+            SqlConnection conn = getConnection();
+            string query = "DELETE FROM [dbo].[Device] WHERE ID=@id";
+            using (SqlCommand command = conn.CreateCommand()) {
+                command.CommandText = query;
+                conn.Open();
+                try {
+                    command.Parameters.AddWithValue("@id", deviceID);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) {
+                    throw new DeviceRepoADOException("RemoveDevice", ex);
+                }
+                finally {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void MarkDeviceAvailable(int iD) {
+            SqlConnection conn = getConnection();
+            string query = "UPDATE [dbo].[Device] " +
+                "SET Is_usable=1 " +
+                "WHERE ID=@id";
+            using (SqlCommand command = conn.CreateCommand()) {
+                command.CommandText = query;
+                conn.Open();
+                try {
+                    command.Parameters.AddWithValue("@id", iD);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) {
+                    throw new DeviceRepoADOException("RemoveDevice", ex);
+                }
+                finally {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void MarkDeviceUnAvailable(int iD) {
+            SqlConnection conn = getConnection();
+            string query = "UPDATE [dbo].[Device] " +
+                "SET Is_usable=0 " +
+                "WHERE ID=@id";
+            using (SqlCommand command = conn.CreateCommand()) {
+                command.CommandText = query;
+                conn.Open();
+                try {
+                    command.Parameters.AddWithValue("@id", iD);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex) {
+                    throw new DeviceRepoADOException("RemoveDevice", ex);
+                }
+                finally {
+                    conn.Close();
+                }
+            }
+        }
     }
 }

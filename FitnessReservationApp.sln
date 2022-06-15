@@ -22,7 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservationBLTest", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D336AEE8-A6A7-4F03-820E-8492C5E55983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessReservationDLTest", "FitnessReservationDLTest\FitnessReservationDLTest.csproj", "{5E20D071-7D56-48FA-B425-EE78AED0DAC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservationDLTest", "FitnessReservationDLTest\FitnessReservationDLTest.csproj", "{5E20D071-7D56-48FA-B425-EE78AED0DAC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessAdmin.UI", "FitnessAdmin.UI\FitnessAdmin.UI.csproj", "{EA7E73E7-FD84-4DE1-9883-5D2B0900834B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{5E20D071-7D56-48FA-B425-EE78AED0DAC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E20D071-7D56-48FA-B425-EE78AED0DAC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E20D071-7D56-48FA-B425-EE78AED0DAC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA7E73E7-FD84-4DE1-9883-5D2B0900834B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA7E73E7-FD84-4DE1-9883-5D2B0900834B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA7E73E7-FD84-4DE1-9883-5D2B0900834B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA7E73E7-FD84-4DE1-9883-5D2B0900834B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

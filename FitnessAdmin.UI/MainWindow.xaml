@@ -1,0 +1,39 @@
+﻿<Window x:Class="FitnessAdmin.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessAdmin.UI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Filter on device type:"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Name="comboFilterDevice" SelectionChanged="comboFilterDevice_SelectionChanged"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Filter on device ID:"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="txtFilterID" TextChanged="txtFilterID_TextChanged"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Devices:"/>
+
+        <Button Grid.Row="3" Grid.Column="1" Name="btnDelete" Content="Delete" Click="btnDelete_Click" IsEnabled="False"/>
+        <Button Grid.Row="4" Grid.Column="1" Name="btnMarkAvailable" Content="Mark as available" Click="btnMarkAvailable_Click" IsEnabled="False"/>
+        <Button Grid.Row="5" Grid.Column="1" Name="btnMarkUnAvailable" Content="Mark as unavailable" Click="btnMarkUnAvailable_Click" IsEnabled="False"/>
+        <Button Grid.Row="6" Grid.Column="1" Name="btnAddDevice" Content="Add device" Click="btnAddDevice_Click"/>
+
+        <ListBox Grid.Row="3" Grid.Column="0" Grid.RowSpan="4" Name="listBoxDevices" SelectionChanged="listBoxDevices_SelectionChanged"/>
+    </Grid>
+</Window>
