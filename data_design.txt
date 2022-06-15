@@ -48,3 +48,6 @@ Fitness:
   Can have new devices -> must be added to list of available devices ==> Fitness class which holds list of Devices
 - If Device gets removed from fitness, keep historical reservations ==> Controller class immediately writes to DB (maybe)
 - Cannot remove Device if it has reservations (pending) ==> Controller controls if there is Reservation associated with Device
+
+
+Reservation: client_id, date, timeslot_id, device_id, reservation_id

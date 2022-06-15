@@ -1,4 +1,5 @@
 ﻿using FitnessReservation.BL.Domain;
+using FitnessReservation.BL.DTO;
 using FitnessReservation.BL.Managers;
 using FitnessReservation.DL;
 using System;
@@ -22,15 +23,25 @@ namespace FitnessReservation.UI {
     /// </summary>
     public partial class HomePageWindow : Window {
         //private string connectionString = @"Data Source=DESKTOP-QT687QR\SQLEXPRESS;Initial Catalog=FitnessCentre;Integrated Security=True";
-        private ClientManager cm = new ClientManager(new ClientRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
-        private ReservationManager rm = new ReservationManager(new ReservationRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
+        private ClientManager cm;
+        private ReservationManager rm;
+        private int clientID;
         public HomePageWindow(int? clientID, string clientEmail) {
             InitializeComponent();
+            cm = new ClientManager(new ClientRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
+            rm = new ReservationManager(new ReservationRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
             Client user = cm.GetClientDetails(clientID, clientEmail);
             string userFname = user.FirstName;
             labelWelcome.Content = $"Welcome, {userFname}";
-            var reservations = rm.GetReservations(user.ID);
+            this.clientID = user.ID;
+            IReadOnlyList<ReservationInfoDTO> reservations = rm.GetReservations(this.clientID);
             listBoxReservations.ItemsSource = reservations;
+
+        }
+
+        private void btnReservation_Click(object sender, RoutedEventArgs e) {
+            MakeReservationWindow makeReservationWindow = new MakeReservationWindow(this.clientID);
+            makeReservationWindow.ShowDialog();
         }
         //public HomePageWindow(string clientEmail) {
         //    InitializeComponent();

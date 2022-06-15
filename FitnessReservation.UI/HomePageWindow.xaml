@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessReservation.UI"
         mc:Ignorable="d"
-        Title="HomePageWindow" Height="350" Width="500">
+        Title="Fitness Reservations - Overview" Height="350" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
@@ -19,6 +19,6 @@
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Name="labelWelcome" Content="Welcome, User"/>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Your reservations:" VerticalAlignment="Bottom"/>
         <ListBox Name="listBoxReservations" Grid.Row="2" Grid.Column="0" Margin="5,5,5,5"/>
-        <Button Grid.Row="2" Grid.Column="1" Name="btnReservation" Content="Make new reservation" Width="auto" Height="auto" Margin="50,111,68,120"/>
+        <Button Grid.Row="2" Grid.Column="1" Name="btnReservation" Content="Make new reservation" Width="auto" Height="auto" Margin="50,111,68,120" Click="btnReservation_Click"/>
     </Grid>
 </Window>

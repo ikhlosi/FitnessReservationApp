@@ -58,5 +58,91 @@ namespace FitnessReservation.DL {
                
             }
         }
+
+        public int? GetReservationId(int id, DateTime date) { //returns -1 if none found
+            if (id <= 0) {
+                throw new ReservationRepoADOException("GetReservationId - no valid input");
+            }
+
+            SqlConnection conn = getConnection();
+            string query = "SELECT ID from dbo.Reservation " +
+                "WHERE Client_id=@id AND Reservation_date=@date";
+            using (SqlCommand cmd = conn.CreateCommand()) {
+                conn.Open();
+                try {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.CommandText = query;
+                    int? reservationId = (int?)cmd.ExecuteScalar();
+                    //if (reservationId == null) {
+                    //    return -1;
+                    //}
+                    //return (int)reservationId;
+                    return reservationId;
+                }
+                catch (Exception ex) {
+
+                    throw new ReservationRepoADOException("GetReservationId", ex);
+                }
+                finally {
+                    conn.Close();
+                }
+            }
+        }
+
+        public int WriteReservationInDB(int id, DateTime date) {
+            if (id <= 0) {
+                throw new ReservationRepoADOException("WriteReservationInDB - no valid input");
+            }
+            SqlConnection conn = getConnection();
+            string query = "INSERT INTO dbo.Reservation(Client_id,Reservation_date) "
+                + "output INSERTED.ID VALUES(@id,@date)";
+            try {
+                using (SqlCommand cmd = conn.CreateCommand()) {
+                    conn.Open();
+                    cmd.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int));
+                    cmd.Parameters.Add(new SqlParameter("@date", System.Data.SqlDbType.Date));
+                    cmd.Parameters["@id"].Value = id;
+                    cmd.Parameters["@date"].Value = date;
+                    cmd.CommandText = query;
+                    int reservationID = (int)cmd.ExecuteScalar();
+                    return reservationID;
+                }
+            }
+            catch (Exception ex) {
+                throw new ReservationRepoADOException("WriteReservationInDB", ex);
+            }
+            finally {
+                conn.Close();
+            }
+        }
+
+        public void WriteReservationDetailsInDB(int reservationID, int deviceID, int timeslotID) {
+            if (reservationID <= 0 || deviceID <= 0 || timeslotID <= 0) {
+                throw new ReservationRepoADOException("WriteReservationDetailsInDB - no valid input");
+            }
+            SqlConnection conn = getConnection();
+            string query = "INSERT INTO dbo.Reservationdetails(Reservation_id,Device_id,Timeslot_id) "
+                + "VALUES(@revid,@devid,@tsid)";
+            try {
+                using (SqlCommand cmd = conn.CreateCommand()) {
+                    conn.Open();
+                    cmd.Parameters.Add(new SqlParameter("@revid", System.Data.SqlDbType.Int));
+                    cmd.Parameters.Add(new SqlParameter("@devid", System.Data.SqlDbType.Int));
+                    cmd.Parameters.Add(new SqlParameter("@tsid", System.Data.SqlDbType.Int));
+                    cmd.Parameters["@revid"].Value = reservationID;
+                    cmd.Parameters["@devid"].Value = deviceID;
+                    cmd.Parameters["@tsid"].Value = timeslotID;
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex) {
+                throw new ReservationRepoADOException("WriteReservationInDB", ex);
+            }
+            finally {
+                conn.Close();
+            }
+        }
     }
 }

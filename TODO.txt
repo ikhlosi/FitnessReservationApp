@@ -1,2 +1,5 @@
 - 
 - change Label with TextBlock whenever possible because Label is heavier
+- ensure you can't make 2 the same reservations in DB
+- check if reservation date is max 1 week in the future
+- after reservation made, new reservation must appear in listbox of HomePageWindow

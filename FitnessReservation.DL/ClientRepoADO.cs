@@ -67,7 +67,7 @@ namespace FitnessReservation.DL {
 
         public Client GetClientDetails(int? id, string email) {
             if ((!id.HasValue) && (string.IsNullOrEmpty(email) == true)) {
-                throw new ClientRepoADOException("FindClient - no valid input");
+                throw new ClientRepoADOException("GetClientDetails - no valid input");
             }
 
             SqlConnection conn = getConnection();
@@ -96,6 +96,7 @@ namespace FitnessReservation.DL {
                         string clientFname = (string)reader["Fname"];
                         string clientLname = (string)reader["Lname"];
                         string clientEmail = (string)reader["Email"];
+                        reader.Close();
                         Client c = new Client(clientID,clientEmail,clientFname,clientLname);
                         return c;
                     } else {
@@ -112,9 +113,10 @@ namespace FitnessReservation.DL {
                 }
                 catch (Exception ex) {
 
-                    throw new ClientRepoADOException("FindClient", ex);
+                    throw new ClientRepoADOException("GetClientDetails", ex);
                 }
                 finally {
+                    
                     conn.Close();
                 }
             }

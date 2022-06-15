@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessReservation.UI"
         mc:Ignorable="d"
-        Title="MakeReservationWindow" Height="450" Width="800">
+        Title="Make a Reservation" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,16 +20,16 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="New Reservation" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Select Date:"/>
-        <DatePicker Grid.Row="1" Grid.Column="1" FirstDayOfWeek="Monday"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Date to reserve:"/>
+        <DatePicker Grid.Row="1" Grid.Column="1" FirstDayOfWeek="Monday" Name="dateReservation" SelectedDateFormat="Long" SelectedDateChanged="dateReservation_SelectedDateChanged"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Select Device:"/>
-        <ComboBox Grid.Row="2" Grid.Column="1"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Device to reserve"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Name="comboDevice" IsEnabled="False" SelectionChanged="comboDevice_SelectionChanged"/>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Select Device:"/>
-        <ComboBox Grid.Row="3" Grid.Column="1"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Select Timeslot:"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" Name="comboTimeslot" IsEnabled="False" SelectionChanged="comboTimeslot_SelectionChanged"/>
 
-        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Name="btnReserve" Content="Reserve" Margin="44,2,44,2" Click="btnReserve_Click"/>
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Name="btnReserve" Content="Reserve" Margin="44,2,44,2" Click="btnReserve_Click" IsEnabled="False"/>
 
         <!--<ListBox Grid.Row="3" Grid.Column="0" Name="listTimeslots"/>-->
     </Grid>

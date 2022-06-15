@@ -30,9 +30,9 @@ namespace FitnessReservation.UI {
             try {
                 int? clientID = null;
                 string clientEmail;
-                if (string.IsNullOrWhiteSpace(txtClientID.Text) && string.IsNullOrWhiteSpace(txtEmail.Text)) {
-                    MessageBox.Show("Please provide either a Client ID or an E-mail");
-                }
+                //if (string.IsNullOrWhiteSpace(txtClientID.Text) && string.IsNullOrWhiteSpace(txtEmail.Text)) {
+                //    MessageBox.Show("Please provide either a Client ID or an E-mail");
+                //}
                 if (!string.IsNullOrWhiteSpace(txtClientID.Text)) {
                     clientID = int.Parse(txtClientID.Text);
                 }
