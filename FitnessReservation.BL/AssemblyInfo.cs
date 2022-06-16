@@ -21,3 +21,5 @@ using System.Runtime.InteropServices;
 [assembly: InternalsVisibleTo("FitnessAdmin.UI")]
 [assembly: InternalsVisibleTo("FitnessReservationBLTest")]
 [assembly: InternalsVisibleTo("FitnessReservationDLTest")]
+[assembly: InternalsVisibleTo("TestProjectDomain")]
+

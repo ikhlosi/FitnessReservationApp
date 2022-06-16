@@ -5,32 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessReservation.UI"
         mc:Ignorable="d"
-        Title="Make a Reservation" Height="450" Width="800">
+        Title="Make a Reservation" Height="350" Width="500">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="New Reservation" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Date to reserve:"/>
-        <DatePicker Grid.Row="1" Grid.Column="1" FirstDayOfWeek="Monday" Name="dateReservation" SelectedDateFormat="Long" SelectedDateChanged="dateReservation_SelectedDateChanged"/>
+        <DatePicker Grid.Row="0" Grid.Column="0" FirstDayOfWeek="Monday" Name="dateReservation" SelectedDateFormat="Long" SelectedDateChanged="dateReservation_SelectedDateChanged" Padding="5,0,5,0"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Device to reserve"/>
-        <ComboBox Grid.Row="2" Grid.Column="1" Name="comboDevice" IsEnabled="False" SelectionChanged="comboDevice_SelectionChanged"/>
-
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Select Timeslot:"/>
-        <ComboBox Grid.Row="3" Grid.Column="1" Name="comboTimeslot" IsEnabled="False" SelectionChanged="comboTimeslot_SelectionChanged"/>
-
-        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Name="btnReserve" Content="Reserve" Margin="44,2,44,2" Click="btnReserve_Click" IsEnabled="False"/>
-
-        <!--<ListBox Grid.Row="3" Grid.Column="0" Name="listTimeslots"/>-->
+        <ListBox Grid.Row="1" Grid.Column="0" Name="listBoxAddedTimeSlots" Margin="5,5,5,5"/>
+        <Button Grid.Row="1" Grid.Column="1" Name="btnAddTimeSlot" Content="Add" Margin="10,75,10,75" Click="btnAddTimeSlot_Click"/>
+        <Button Grid.Row="2" Name="btnMakeReservation" Content="Make reservation" Margin="100,20,100,20" Click="btnMakeReservation_Click"/>
     </Grid>
 </Window>

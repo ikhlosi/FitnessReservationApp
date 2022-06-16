@@ -42,6 +42,7 @@ namespace FitnessReservation.UI {
         private void btnReservation_Click(object sender, RoutedEventArgs e) {
             MakeReservationWindow makeReservationWindow = new MakeReservationWindow(this.clientID);
             makeReservationWindow.ShowDialog();
+            listBoxReservations.ItemsSource = rm.GetReservations(this.clientID);
         }
         //public HomePageWindow(string clientEmail) {
         //    InitializeComponent();

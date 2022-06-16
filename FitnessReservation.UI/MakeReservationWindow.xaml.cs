@@ -1,4 +1,7 @@
-﻿using FitnessReservation.BL.Managers;
+﻿using FitnessReservation.BL.Domain;
+using FitnessReservation.BL.DTO;
+using FitnessReservation.BL.Exceptions;
+using FitnessReservation.BL.Managers;
 using FitnessReservation.DL;
 using System;
 using System.Collections.Generic;
@@ -20,56 +23,48 @@ namespace FitnessReservation.UI {
     /// Interaction logic for MakeReservationWindow.xaml
     /// </summary>
     public partial class MakeReservationWindow : Window {
-        private ReservationManager rm;
-        private TimeSlotManager tm;
-        private DeviceManager dm;
+        //private string selectedDeviceType;
+        //private int selectedTimeSlotID;
         private int clientID;
+        private ReservationManager rm;
+       
         public MakeReservationWindow(int clientID) {
             InitializeComponent();
-            rm = new ReservationManager(new ReservationRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
-            tm = new TimeSlotManager(new TimeSlotRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
-            dm = new DeviceManager(new DeviceRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
             this.clientID = clientID;
+            rm = new ReservationManager(new ReservationRepoADO(ConfigurationManager.ConnectionStrings["FitnessCentreDBConnection"].ToString()));
             dateReservation.DisplayDateStart = DateTime.Today.AddDays(1);
             dateReservation.DisplayDateEnd = DateTime.Today.AddDays(7);
-            comboTimeslot.ItemsSource = tm.SelectTimeSlots();
-            comboDevice.ItemsSource = dm.SelectDevices();
-            //comboDevice.ItemsSource = new List<string> { "ltreadmill", "bike"};
         }
 
-        private void btnReserve_Click(object sender, RoutedEventArgs e) {
-            DateTime? selectedDate = null;
-            string selectedDeviceType = null;
-            int? selectedTimeslotId = null;
-            try {
-                int clientId = this.clientID;
-                selectedDate = dateReservation.SelectedDate;
-                selectedTimeslotId = ++comboTimeslot.SelectedIndex;
-                selectedDeviceType = (string)comboDevice.SelectedItem;
-                rm.MakeReservation(clientID, selectedDate, selectedTimeslotId,selectedDeviceType);
-                //int reservationID = rm.WriteReservationInDB(clientId, selectedDate);
-
-                //comboTimeslot.SelectedIndex
-                //comboTimeslot.SelectedIndex = 0;
+        private void btnAddTimeSlot_Click(object sender, RoutedEventArgs e) {
+            AddTimeSlotWindow addTimeSlotWindow = new AddTimeSlotWindow((DateTime)dateReservation.SelectedDate);
+            if (addTimeSlotWindow.ShowDialog() == true) {
+                string selectedDeviceType = (string)addTimeSlotWindow.comboDevice.SelectedItem;
+                int selectedTimeSlotID = (int)addTimeSlotWindow.comboTimeslot.SelectedIndex + 1;
+                var timeslotsList = from i in listBoxAddedTimeSlots.Items.Cast<ReservationInfoDTO>().ToList() select i.ReservedSlotID;
+                //var sequences = timeslotsList.Distinct()
+                //     .GroupBy(num => Enumerable.Range(num, 100 - num + 1).TakeWhile(timeslotsList.Contains).Last())  
+                //     .Where(seq => seq.Count() >= 2);
+                listBoxAddedTimeSlots.Items.Add(new ReservationInfoDTO((DateTime)dateReservation.SelectedDate, selectedTimeSlotID, selectedDeviceType));
+                if (listBoxAddedTimeSlots.Items.Count > 4) {
+                    listBoxAddedTimeSlots.Items.RemoveAt(listBoxAddedTimeSlots.Items.Count-1);
+                    MessageBox.Show("Cannot have more than 4 timeslots/day");
+                }
             }
-            catch (Exception ex) { 
+        }
+
+        private void btnMakeReservation_Click(object sender, RoutedEventArgs e) {
+            try {
+                rm.MakeReservation(this.clientID, listBoxAddedTimeSlots.Items.Cast<ReservationInfoDTO>().ToList());
+            } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
-            //if (dateReservation.SelectedDate < DateTime.Today.AddDays(1) || dateReservation.SelectedDate > DateTime.Today.AddDays(7)) {
-            //    MessageBox.Show("Only allowed to choose a date which is in the future (maximum 1 week)");
-            //}
+            DialogResult = true;
+            this.Close();
         }
 
         private void dateReservation_SelectedDateChanged(object sender, SelectionChangedEventArgs e) {
-            comboDevice.IsEnabled = true;
-        }
-
-        private void comboTimeslot_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            btnReserve.IsEnabled = true;
-        }
-
-        private void comboDevice_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            comboTimeslot.IsEnabled = true;
+            listBoxAddedTimeSlots.Items.Clear();
         }
     }
 }

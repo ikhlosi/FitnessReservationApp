@@ -38,7 +38,7 @@ namespace FitnessReservation.UI {
                 }
                 clientEmail = txtEmail.Text;
                 HomePageWindow homePageWindow = new HomePageWindow(clientID, clientEmail);
-                homePageWindow.ShowDialog();
+                homePageWindow.Show();
                 //if (!string.IsNullOrWhiteSpace(txtClientID.Text)) {
                 //    int clientID = int.Parse(txtClientID.Text);
                 //    //clientManager.GetClientById(clientID);
@@ -60,6 +60,7 @@ namespace FitnessReservation.UI {
                 //    HomePageWindow homePageWindow = new HomePageWindow();
                 //    homePageWindow.ShowDialog();
                 //}
+                this.Close();
             } catch (Exception ex){
                 MessageBox.Show(ex.Message, "Login");
             }
