@@ -22,7 +22,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D336AEE8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessAdmin.UI", "FitnessAdmin.UI\FitnessAdmin.UI.csproj", "{EA7E73E7-FD84-4DE1-9883-5D2B0900834B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectDomain", "TestProjectDomain\TestProjectDomain.csproj", "{AA43742C-30C0-486E-8F39-A72CBAF044A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProjectDomain", "TestProjectDomain\TestProjectDomain.csproj", "{AA43742C-30C0-486E-8F39-A72CBAF044A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{E2C9CA1F-74B7-4F66-9D06-7E7700FF1EB0}"
+	ProjectSection(SolutionItems) = preProject
+		tables.sql = tables.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +58,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E2C9CA1F-74B7-4F66-9D06-7E7700FF1EB0} = {782D79A8-B342-4BE2-AC02-DEF5050B9A3C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FEC8A406-0E4A-4299-A4FE-9CD8B3258234}
